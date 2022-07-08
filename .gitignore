@@ -5,3 +5,4 @@ bill-app/Billed-app-FR-Back/database_test.sqlite
 bill-app/Billed-app-FR-Front/node_modules
 bill-app/Billed-app-FR-Front/coverage
 bill-app/Billed-app-FR-Front/.idea
+.eslintrc.js
