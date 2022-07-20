@@ -131,21 +131,23 @@ export default class {
   }
 
   handleShowTickets(e, bills, index) {
-    if (this.counter === undefined || this.index !== index) this.counter = 0
-    if (this.index === undefined || this.index !== index) this.index = index
-    if (this.counter % 2 === 0) {
-      $(`#arrow-icon${this.index}`).css({ transform: 'rotate(0deg)'})
-      $(`#status-bills-container${this.index}`)
-        .html(cards(filteredBills(bills, getStatus(this.index))))
-      this.counter ++
+    // set visibility status
+    if($(`#arrow-icon${index}`).data("visibility") === undefined ) $(`#arrow-icon${index}`).data("visibility", 'closed')
+    // verify list visibility status
+    if ($(`#arrow-icon${index}`).data("visibility") === 'closed') {
+      $(`#arrow-icon${index}`).css({ transform: 'rotate(0deg)'})
+      $(`#status-bills-container${index}`)
+        .html(cards(filteredBills(bills, getStatus(index))))
+      $(`#arrow-icon${index}`).data("visibility", 'open')
     } else {
-      $(`#arrow-icon${this.index}`).css({ transform: 'rotate(90deg)'})
-      $(`#status-bills-container${this.index}`)
+      $(`#arrow-icon${index}`).css({ transform: 'rotate(90deg)'})
+      $(`#status-bills-container${index}`)
         .html("")
-      this.counter ++
+      $(`#arrow-icon${index}`).data("visibility", 'closed')
     }
 
     bills.forEach(bill => {
+      $(`#open-bill${bill.id}`).off('click')
       $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
     })
 
