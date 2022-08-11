@@ -69,7 +69,7 @@ npm install
 ### Run the API :
 
 ```
-npm run:dev
+npm run run:dev
 ```
 
 ### Access to the PAI :

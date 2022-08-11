@@ -23,10 +23,18 @@ const rows = (data) => {
   return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
 }
 
+const sortDateFormated = (a, b) => {
+    // sort the dates regardless of the format 
+    const date1 = new Date(a.date)
+    const date2 = new Date(b.date)
+    return ((date1 < date2) ? 1 : -1)}
+
 export default ({ data: bills, loading, error }) => {
-  
+  // sort bills from newer to older
+  bills = (bills) ? [...bills].sort(sortDateFormated) : bills
+
   const modal = () => (`
-    <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modaleFile" data-testid="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
